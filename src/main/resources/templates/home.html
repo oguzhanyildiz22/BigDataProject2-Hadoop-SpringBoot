@@ -1,50 +1,57 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <link rel="stylesheet" href="/templates/css/styles.css">
-    <title>Hadoop</title>
-</head>
-<body>
+    <!DOCTYPE html>
+    <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        <link rel="stylesheet" href="/templates/css/styles.css">
+        <title>Hadoop Example Project</title>
+    </head>
+    <body>
 
-<div class="container mt-5">
-    <h1 class="text-center mb-4">Employee List</h1>
-    <table class="table table-striped table-hover">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">EMPNO</th>
-            <th scope="col">ENAME</th>
-            <th scope="col">JOB</th>
-            <th scope="col">MGR</th>
-            <th scope="col">HIREDATE</th>
-            <th scope="col">SAL</th>
-            <th scope="col">COMM</th>
-            <th scope="col">IMG</th>
-            <th scope="col">DEPT NAME</th>
-            <th scope="col">LOCATION</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="c : ${employeeDTO}">
-            <td th:text="${c.empNo}"></td>
-            <td th:text="${c.empName}"></td>
-            <td th:text="${c.job}"></td>
-            <td th:text="${c.mgr}"></td>
-            <td th:text="${c.hireDate}"></td>
-            <td th:text="${c.salary}"></td>
-            <td th:text="${c.comm}"></td>
-            <td>
-                <img th:src="'data:image/jpg;base64,' + ${c.img}" alt="Employee Image" class="img-fluid" style="max-width: 100px;">
-            </td>
-            <td th:text="${c.departmentDTO.deptName}"></td>
-            <td th:text="${c.departmentDTO.location}"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Employee List</h1>
+        <div class="text-right mb-3">
+            <a th:href="@{/add-employee-form}" class="btn btn-primary">Add Employee</a>
+        </div>
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Actions</th>
+                <th scope="col">EMPNO</th>
+                <th scope="col">ENAME</th>
+                <th scope="col">JOB</th>
+                <th scope="col">MGR</th>
+                <th scope="col">HIREDATE</th>
+                <th scope="col">SAL</th>
+                <th scope="col">COMM</th>
+                <th scope="col">IMG</th>
+                <th scope="col">DEPT NAME</th>
+                <th scope="col">LOCATION</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="c : ${employeeDTO}">
+                <td>
+                    <a th:href="@{/delete-employee-confirmation/{empNo}(empNo=${c.empNo})}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+                <td th:text="${c.empNo}"></td>
+                <td th:text="${c.empName}"></td>
+                <td th:text="${c.job}"></td>
+                <td th:text="${c.mgr}"></td>
+                <td th:text="${c.hireDate}"></td>
+                <td th:text="${c.salary}"></td>
+                <td th:text="${c.comm}"></td>
+                <td>
+                    <img th:src="'data:image/jpg;base64,' + ${c.img}" alt="Employee Image" class="img-fluid" style="max-width: 100px;">
+                </td>
+                <td th:text="${c.departmentDTO.deptName}"></td>
+                <td th:text="${c.departmentDTO.location}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-</body>
-</html>
+    </body>
+    </html>
